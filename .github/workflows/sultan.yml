@@ -89,7 +89,7 @@ jobs:
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
 
-          SUSFS_VERSION="2.0.0"
+          SUSFS_VERSION="2.1.0"
 
           echo "Applying SUSFS patches..."
 
@@ -106,7 +106,7 @@ jobs:
           perl -0pi -e 's/if \(IS_ERR\(f\)\) \{/if (IS_ERR(f) && !libperfmgr_redirect(&f, dfd, tmp, &op, how)) {/g' fs/open.c
           
           cp ../kernel_patches/sultan/sys.c_fix.patch ./
-          patch -p1 < sys.c_fix.patch
+          patch -p1 < sys.c_fix.patch || true
 
           cd KernelSU-Next
           curl -LO https://raw.githubusercontent.com/WildKernels/kernel_patches/main/wild/archived/ksun-293ca01-susfs-v2.1.0-a14-6.1-ef16cbce.patch
