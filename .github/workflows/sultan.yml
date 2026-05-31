@@ -115,6 +115,8 @@ jobs:
           cd KernelSU-Next
           curl -LO https://raw.githubusercontent.com/WildKernels/kernel_patches/main/wild/archived/ksun-293ca01-susfs-v2.1.0-a14-6.1-ef16cbce.patch
           patch -p1 < ksun-293ca01-susfs-v2.1.0-a14-6.1-ef16cbce.patch
+          # Fix mixed space/tab indentation introduced by patch (-Werror=misleading-indentation)
+          sed -i 's/^    /\t/g' kernel/feature/sucompat.c
 
       - name: Configure KernelSU
         if: contains(matrix.features, 'wksu')
@@ -142,7 +144,7 @@ jobs:
           echo "CONFIG_TMPFS_POSIX_ACL=y" >> ./arch/arm64/configs/${{ inputs.codename }}_defconfig
 
       - name: Configure Networking
-        if: true
+        if: false
         run: |
           cd "$CONFIG"
           # Networking Configuration
@@ -153,7 +155,7 @@ jobs:
 
       - name: Add IP SET & IPv6_NAT Support
         shell: bash
-        if: true
+        if: false
         run: |
           cd "$CONFIG"
           cat >> "./arch/arm64/configs/${{ inputs.codename }}_defconfig" << 'EOF'
@@ -183,7 +185,7 @@ jobs:
 
       - name: Apply TCP Congestion Control
         shell: bash
-        if: true
+        if: false
         run: |
           cd "$CONFIG"
           cat >> "./arch/arm64/configs/${{ inputs.codename }}_defconfig" << 'EOF'
