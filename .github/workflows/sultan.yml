@@ -109,7 +109,7 @@ jobs:
           patch -p1 < sys.c_fix.patch
 
           cd KernelSU-Next
-          cp ${{ github.workspace }}/kernel_patches/blob/main/wild/archived/ksun-293ca01-susfs-v2.1.0-a14-6.1-ef16cbce.patch ./
+          curl -LO https://raw.githubusercontent.com/WildKernels/kernel_patches/main/wild/archived/ksun-293ca01-susfs-v2.1.0-a14-6.1-ef16cbce.patch
           patch -p1 < ksun-293ca01-susfs-v2.1.0-a14-6.1-ef16cbce.patch
 
       - name: Configure KernelSU
